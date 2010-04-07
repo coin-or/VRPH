@@ -1,0 +1,30 @@
+To compile the VRPH library, and the four binaries,
+vrp_rtr, vrp_sa, vrp_ej, and vrp_init, you should just
+be able to run "make" from this directory (VRPH-1.0/).
+
+There are no external dependencies to build these applications
+and I have encountered no difficulties after trying
+various Linux and Cygwin installations.
+
+The VRPH-1.0/MSVC_2008 directory contains a VRPH.sln file that
+contains projects for building the VRPH library and these
+four applications.  Again, these are all self-contained
+and the solution should build with no warnings or errors.
+
+When you run "make" or build the Visual Studio solution,
+the VRPH-1.0 library (libvrph.a or vrph.lib) is created in 
+the VRPH-1.0/lib/ directory.  The four applications are then
+created in the VRPH-1.0/bin directory by statically linking 
+to this library.
+
+To build the vrp_sp application, you will
+need a working installation of Coin-OSI, CoinUtils, and
+the GLPK MIP solver.  Assuming this is the case, you then
+need to modify the directories in the makefile so that the
+compiler can find the relevant include and lib directories.
+
+To build the vrp_plotter application, you will need a working
+installation of the PLPlot library.  Then modify the directories
+in the makefile so that the compiler can find the include
+files and the PLPlot library.
+

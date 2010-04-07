@@ -1,0 +1,19 @@
+There are 6 project files here in the appropriate directories.  The
+VRPH project builds the static library and the other projects are
+linked statically to this library.  To build the vrp_plot application,
+you need to first build the VRPH library with HAS_PLPLOT defined and 
+add the include the directory for the PLPlot header files.  Then
+add the PLPlot include and library directories to the vrp_plot 
+project.  This project is not included in the VRPH solution file
+so that all the projects in the solution can be built initially 
+without modification.
+
+The library and executable files are built in the VRPH\MSVC_2008\VRPH\Debug 
+or VRPH\MSVC_2008\VRPH\Release directory depending on the configuration 
+(Debug or Release).
+
+I did succeed in compiling the vrp_sp application on Windows but it
+requires a number of GLPK and OSI external dependencies and so I did 
+not include it in this distribution.  
+
+cgroer@gmail.com
