@@ -1,0 +1,55 @@
+It is fairly straightforward to get this integration to work.
+I used the latest (March 2010) stable SYMPHONY 5.2, obtained via 
+
+> svn checkout https://projects.coin-or.org/svn/SYMPHONY/stable/5.2 SYMPHONY-5.2
+
+First, build SYMPHONY and the Applications by running
+
+> ./configure --with-application
+> make
+> make install
+
+Then cd to the SYMPHONY/Applications/VRP directory and 
+add the following to the Makefile (I added it just beneath
+the Concorde section)
+
+########
+# VRPH #
+########
+# This assumes that VRPH is in the ~/VRPH-1.0 directory
+USE_VRPH = TRUE
+ifeq ($(USE_VRPH),TRUE)
+ADDLIBS+=-L${HOME}/VRPH-1.0/lib -lvrph
+ADDINCFLAGS += -I${HOME}/VRPH-1.0/inc
+endif
+
+This will make SYMPHONY aware of the static VRPH library and the
+necessary VRPH include files.  Then I added code to SYMPHONY's existing 
+vrp_main.c to use VRPH to find a quick initial upper bound. The resulting 
+file is the SYMPHONY_vrp_main.c file in this directory.  Copy it to the
+SYMPHONY/Applications/VRP/src/Master/ directory and replace the existing
+vrp_main.c file with this one and rename it to vrp_main.c unless you
+want to edit the Makefile, etc. 
+
+There are additional comments in that file to describe what's going on.  
+You can turn off VRPH by setting the flag
+
+#define USE_VRPH 0
+
+at the top of the file.
+
+Note that VRPH always tries to minimize the # of vehicles so take care
+that the VRPH solution is feasible for those problems that specify 
+a larger number of vehicles!!  In particular, you still need to set the
+number of trucks/vehicles for SYMPHONY by using the -N option. 
+
+You can test the installation on SYMPHONY's sample file by running
+
+> vrp -F sample.vrp -N 5
+
+Note that SYMPHONY will probably report an infeasibility since VRPH typically
+finds the optimal solution of 521. This is normal as you are introducing an 
+additional constraint to the problem by setting this upper bound.  When
+an infeasibility is reported, this is effectively a "certificate" of the
+optimality of the initial solution.
+

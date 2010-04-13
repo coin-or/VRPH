@@ -1,0 +1,33 @@
+The hardest part of getting the VRPH-PLPLOT interface working is 
+compiling PLPLOT using the CMake system.  I have
+not experimented at all with the shared libraries, and the makefile assumes
+that PLPLOT is built with a static library.  
+
+Once you compile PLPLOT, the resulting VRP plots you can make
+are quite nice and I added a number of features to allow the user to tweak
+how the plots are made.  You can use these plots in conjunction with the 
+write_tex_file() method in the VRP class which creates a nice tabular output of 
+the solution using the LaTeX longtable package.
+
+-------------------------
+Building PLPlot on Cygwin
+-------------------------
+I successfully build PLPlot for Cygwin using the 
+following procedure.  One warning - make sure you use the Cygwin build of cmake 
+and not the Windows version as I could never get the Windows version to recognize 
+my Cygwin gcc compiler...
+
+cd to plplot/plplot-5.9.4
+>mkdir buildcygwin
+>cd buildcygwin
+>cmake -DCMAKE_INSTALL_PREFIX=./ -DENABLE_tk=OFF -DENABLE_tcl=OFF -DENABLE_f77=OFF -DENABLE_f95=OFF -DENABLE_python=OFF -DENABLE_java=OFF -DENABLE_cxx=OFF -DBUILD_SHARED_LIBS=OFF -DPLD_wingcc=OFF -DPLD_xwin=OFF -G "Unix Makefiles" ../
+>make
+>make install
+
+In previous versions of PLPlot, I only had to link with -lplplotd, but now other libraries seem 
+to be necessary - these are -lqsastime and -lnistcd as seen by the definition of the variable 
+$(PLPLOT_LIB) in the VRPH makefile.
+
+I also succeeded in building PLPlot under Linux and under Windows (using the Windows version of CMake),
+using a similar command to the line above.
+
