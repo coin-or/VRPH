@@ -11,6 +11,15 @@ MSVC_2008/vrp_init/vrp_init.vcproj -text
 MSVC_2008/vrp_plot/vrp_plot.vcproj -text
 MSVC_2008/vrp_rtr/vrp_rtr.vcproj -text
 MSVC_2008/vrp_sa/vrp_sa.vcproj -text
+MSVC_2010/README -text
+MSVC_2010/VRPH/VRPH.sln -text
+MSVC_2010/VRPH/VRPH.vcxproj -text
+MSVC_2010/VRPH/VRPH.vcxproj.filters -text
+MSVC_2010/vrp_ej/vrp_ej.vcxproj -text
+MSVC_2010/vrp_init/vrp_init.vcxproj -text
+MSVC_2010/vrp_plot/vrp_plot.vcxproj -text
+MSVC_2010/vrp_rtr/vrp_rtr.vcxproj -text
+MSVC_2010/vrp_sa/vrp_sa.vcxproj -text
 /README -text
 inc/ClarkeWright.h -text
 inc/Concatenate.h -text
