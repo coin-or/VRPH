@@ -6,16 +6,15 @@ There are no external dependencies to build these applications
 and I have encountered no difficulties after trying
 various Linux and Cygwin installations.
 
-The VRPH-1.0/MSVC_2008 directory contains a VRPH.sln file that
+The MSVC_2008 and MSVC_2010 directories both contain a VRPH.sln file that
 contains projects for building the VRPH library and these
 four applications.  Again, these are all self-contained
 and the solution should build with no warnings or errors.
 
 When you run "make" or build the Visual Studio solution,
-the VRPH-1.0 library (libvrph.a or vrph.lib) is created in 
-the VRPH-1.0/lib/ directory.  The four applications are then
-created in the VRPH-1.0/bin directory by statically linking 
-to this library.
+the VRPH static library (libvrph.a or vrph.lib) is created.
+The four applications are then created in the bin/ directory 
+by statically linking to this library.
 
 To build the vrp_sp application, you will
 need a working installation of Coin-OSI, CoinUtils, and

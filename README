@@ -53,11 +53,6 @@ The various subdirectories contain README's that describe
 the data sets, etc.  See the LICENSE file in this directory for 
 details on the licensing of this code.
 
-The run_all_tests.sh script runs the vrp_rtr binary on all of the
-data files.  The compare_apps.sh script allow one to compare the
-performance of the different applications by running them with
-a fixed set of parameters on different sets of benchmark problems.
-
 If you find the code useful, I'd like to know, so send me an email.
 If you encounter bugs or problems, I'd like to know that too.
 
