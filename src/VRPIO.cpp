@@ -687,10 +687,9 @@ void VRP::read_TSPLIB_file(const char *node_file)
 
         case 18:
             // SVC_TIME_SECTION
-            
-            has_service_times=true;
+			has_service_times=true;
 
-            if(this->num_days==0)// Standard problem
+            if(this->num_days<=1)// 8/15/2010 - used to be ==0 !
             {
                 i=0;
                 while(i<= num_nodes)
@@ -698,7 +697,7 @@ void VRP::read_TSPLIB_file(const char *node_file)
 
                     fscanf(infile,"%d %lf\n",&x,&s);
                     nodes[i].id=x;
-                    nodes[i].service_time=s;                
+                    nodes[i].service_time=s;
                     total_service_time+=nodes[i].service_time;
 
                     if(nodes[i].id>max_id)

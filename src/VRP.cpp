@@ -16,7 +16,7 @@
 void VRPH_version()
 {
     printf("--------------------------------------------\n");
-    printf("VRPH, version 1.0\nCopyright 2010 Chris Groer\nDistributed under Common Public License 1.0\n");
+    printf("VRPH, version 1.0.1\nCopyright 2010 Chris Groer\nDistributed under Common Public License 1.0\n");
     printf("--------------------------------------------\n\n");
 }
 
@@ -378,11 +378,27 @@ void VRP::create_distance_matrix(int type)
     
 
     int i,j,k,n;
-
+    n=this->num_nodes;
 
     if(type==VRPH_EXPLICIT)
+    {
+        // We have presumably already loaded in the distance matrix
+        // But still add in the service times!!
+        if(this->has_service_times)
+        {
+            for(i=0;i<=n+1;i++)
+            {
+                for(j=0;j<=n+1;j++)
+                {
+                    //printf("Adding service time of %f\n",this->nodes[j].service_time);
+                    this->d[i][j]+= .5*this->nodes[j].service_time;
+                    this->d[i][j]+= .5*this->nodes[i].service_time;
+                }
+            }
+        }
         // We have presumably already loaded in the distance matrix!
         return;
+    }
 
     n= this->num_original_nodes;
     k=0;
@@ -393,9 +409,11 @@ void VRP::create_distance_matrix(int type)
     for(i=0;i<=n+1;i++)
     {
         for(j=0;j<=n+1;j++)
+            // CSG: Changed Nov. 20 - add in .5 service time from i and j
             this->d[i][j]=VRPDistance(type, this->nodes[i].x,this->nodes[i].y,this->nodes[j].x,
-                this->nodes[j].y) + this->nodes[j].service_time ;
-
+                this->nodes[j].y) + 
+                0.5*this->nodes[i].service_time +
+                0.5*this->nodes[j].service_time; 
     }
 
 
